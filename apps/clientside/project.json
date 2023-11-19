@@ -1,0 +1,97 @@
+{
+  "name": "clientside",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "clientside",
+  "sourceRoot": "apps/clientside/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/clientside",
+        "index": "apps/clientside/src/index.html",
+        "browser": "apps/clientside/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/clientside/tsconfig.app.json",
+        "assets": [
+          "apps/clientside/src/favicon.ico",
+          "apps/clientside/src/assets"
+        ],
+        "styles": ["apps/clientside/src/styles.css"],
+        "scripts": [],
+        "server": "apps/clientside/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/clientside/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "clientside:build:production"
+        },
+        "development": {
+          "buildTarget": "clientside:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "clientside:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/clientside/**/*.ts",
+          "apps/clientside/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/clientside/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "clientside:build",
+        "staticFilePath": "dist/apps/clientside/browser"
+      }
+    }
+  }
+}
