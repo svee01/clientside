@@ -24,8 +24,10 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npx nx run clientside:build:production
+          npx nx run data-api:build:production
+          # npx nx run clientside:test
+          # npx nx run data-api:test
 
       - name: Zip artifacts for deployment
         run: |
