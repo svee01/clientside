@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "share-a-meal-ui",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/share-a-meal/ui/src",
   "prefix": "clientside",

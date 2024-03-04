@@ -1,5 +1,5 @@
 {
-  "name": "features",
+  "name": "share-a-meal-features",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/share-a-meal/features/src",
   "prefix": "clientside",
